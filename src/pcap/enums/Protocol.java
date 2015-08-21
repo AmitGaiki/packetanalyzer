@@ -13,7 +13,9 @@ public enum Protocol {
 
 	HTTP("http"),
 	TCP("tcp"),
-	UDP("udp");
+	UDP("udp"),
+	IP6("ip6"),
+	IP4("ip4");
 
 	private final String userFriendlyName;
 

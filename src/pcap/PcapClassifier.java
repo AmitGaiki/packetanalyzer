@@ -7,13 +7,14 @@ package pcap;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.jnetpcap.packet.JHeader;
 import org.jnetpcap.protocol.tcpip.Http;
-import org.jnetpcap.protocol.tcpip.Tcp;
 import org.jnetpcap.protocol.tcpip.Udp;
 import pcap.analyzer.HttpAnalyzer;
 import pcap.analyzer.TcpAnalyzer;
 import pcap.analyzer.UdpAnalyzer;
 import pcap.enums.Protocol;
+import pcap.protocols.IP6;
 import pcap.util.Pair;
 
 /**
@@ -44,19 +45,33 @@ public class PcapClassifier {
 				packetProtocols.add(pair);
 				HttpAnalyzer httpAnalyzer = new HttpAnalyzer();
 				httpAnalyzer.setPacket(packet);
-			} else if (packet.hasHeader(Udp.ID)) {
-
+			}
+			else if (packet.hasHeader(Udp.ID)) {
 				Pair pair = new Pair(packet, Protocol.UDP);
 				packetProtocols.add(pair);
 				UdpAnalyzer udpAnalyzer = new UdpAnalyzer();
 				udpAnalyzer.setPacket(packet);
-			} else if (packet.hasHeader(Tcp.ID)) {
-				Pair pair = new Pair(packet, Protocol.TCP);
+			}
+			else if (packet.hasHeader(IP6.ID)) {
+				Pair pair = new Pair(packet, Protocol.IP6);
 				packetProtocols.add(pair);
 				TcpAnalyzer tcpAnalyzer = new TcpAnalyzer();
 				tcpAnalyzer.setPacket(packet);
 			}
 		}
 		return packetProtocols;
+	}
+	
+	public byte[] getPayload(JHeader header, Packet packet){
+		
+		byte[] payload = null;
+		if(packet.hasHeader(header)){
+			if(header.hasPayload()){
+				payload = header.getPayload();
+			}
+		}
+		
+		return payload;
+		
 	}
 }
