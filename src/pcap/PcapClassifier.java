@@ -11,10 +11,8 @@ import org.jnetpcap.packet.JHeader;
 import org.jnetpcap.protocol.tcpip.Http;
 import org.jnetpcap.protocol.tcpip.Udp;
 import pcap.analyzer.HttpAnalyzer;
-import pcap.analyzer.TcpAnalyzer;
 import pcap.analyzer.UdpAnalyzer;
 import pcap.enums.Protocol;
-import pcap.protocols.IP6;
 import pcap.util.Pair;
 
 /**
@@ -51,12 +49,6 @@ public class PcapClassifier {
 				packetProtocols.add(pair);
 				UdpAnalyzer udpAnalyzer = new UdpAnalyzer();
 				udpAnalyzer.setPacket(packet);
-			}
-			else if (packet.hasHeader(IP6.ID)) {
-				Pair pair = new Pair(packet, Protocol.IP6);
-				packetProtocols.add(pair);
-				TcpAnalyzer tcpAnalyzer = new TcpAnalyzer();
-				tcpAnalyzer.setPacket(packet);
 			}
 		}
 		return packetProtocols;
