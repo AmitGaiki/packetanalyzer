@@ -6,7 +6,12 @@
 package main;
 
 import java.util.List;
+import org.jnetpcap.protocol.lan.Ethernet;
+import org.jnetpcap.protocol.network.Ip4;
+import org.jnetpcap.protocol.tcpip.Http;
+import org.jnetpcap.protocol.tcpip.Tcp;
 import pcap.Packet;
+import pcap.PayloadRetriever;
 import pcap.PcapReader;
 
 /**
@@ -31,24 +36,25 @@ public class Main {
 //			System.out.println(pkt.getHeaderCount());
 //			System.out.println(pair.getValue());
 //		}
+//		
+//		Packet packet = p.get(0);
+//		
+//		int headers = packet.getHeaderCount();
+//		System.out.println(headers);
+//		
+//		for(int i = 0; i < headers; i++){
+//			int id = packet.getHeaderIdByIndex(i);
+//			if(packet.hasHeader(id));
+//			
+//			System.out.println(id);
+//		}
 		
 		Packet packet = p.get(0);
-		
-		int headers = packet.getHeaderCount();
-		System.out.println(headers);
-		
-		for(int i = 0; i < headers; i++){
-			int id = packet.getHeaderIdByIndex(i);
-			if(packet.hasHeader(id));
-			
-			System.out.println(id);
-		}
-		
-//		PayloadRetreiver plr = new PayloadRetreiver();
-//		byte[] ethpl = plr.getPayload(p.get(0), new Ethernet());
-//		byte[] ip4pl = plr.getPayload(p.get(0), new Ip4());
-//		byte[] tcppl = plr.getPayload(p.get(0), new Tcp());
-//		byte[] httppl = plr.getPayload(p.get(0), new Http());
+		PayloadRetriever plr = new PayloadRetriever();
+		byte[] ethpl = plr.getPayload(packet, new Ethernet());	
+		byte[] ip4pl = plr.getPayload(packet, new Ip4());
+		byte[] tcppl = plr.getPayload(packet, new Tcp());
+		byte[] httppl = plr.getPayload(packet, new Http());
 //		
 //		for(int i = 0; i < ethpl.length; i++){
 //			System.out.print(ethpl[i]);

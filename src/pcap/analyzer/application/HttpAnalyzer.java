@@ -1,10 +1,11 @@
-/*
+	/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pcap.analyzer;
+package pcap.analyzer.application;
 
+import pcap.analyzer.application.ApplicationAnalyzer;
 import java.util.List;
 import pcap.Packet;
 
@@ -12,11 +13,11 @@ import pcap.Packet;
  *
  * @author amit
  */
-public class UdpAnalyzer {
+public class HttpAnalyzer extends ApplicationAnalyzer{
     
-    private List<Packet> udpPackets;
+    private List<Packet> httpPackets;
     private Packet packet;
-
+    
     public Packet getPacket() {
         return packet;
     }
@@ -25,12 +26,12 @@ public class UdpAnalyzer {
         this.packet = packet;
     }
 
-    public List<Packet> getUdpPackets() {
-        return udpPackets;
+    public List<Packet> getHttpPackets() {
+        return httpPackets;
     }
 
-    public void setUdpPackets(List<Packet> udpPackets) {
-        this.udpPackets = udpPackets;
+    public void setHttpPackets(List<Packet> httpPackets) {
+        this.httpPackets = httpPackets;
     }
     
 }

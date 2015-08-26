@@ -20,10 +20,13 @@ public class Packet extends PcapPacket implements Serializable {
 	 * setter for Packet that instantiates the PcapPacket class by calling the
 	 * constructor
 	 *
-	 * @param instance of PcapPacket.
+	 * @param packet instance of PcapPacket
 	 */
-	Packet(PcapPacket packet) {
+	public Packet(PcapPacket packet) {
 		super(packet);
 	}
 
+	public Packet(byte[] packet) {
+		super(packet);
+	}
 }

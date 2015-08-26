@@ -8,10 +8,11 @@ package pcap;
 import java.util.ArrayList;
 import java.util.List;
 import org.jnetpcap.packet.JHeader;
+import org.jnetpcap.protocol.lan.Ethernet;
 import org.jnetpcap.protocol.tcpip.Http;
 import org.jnetpcap.protocol.tcpip.Udp;
-import pcap.analyzer.HttpAnalyzer;
-import pcap.analyzer.UdpAnalyzer;
+import pcap.analyzer.application.HttpAnalyzer;
+import pcap.analyzer.transport.UdpAnalyzer;
 import pcap.enums.Protocol;
 import pcap.util.Pair;
 
@@ -46,6 +47,12 @@ public class PcapClassifier {
 			}
 			else if (packet.hasHeader(Udp.ID)) {
 				Pair pair = new Pair(packet, Protocol.UDP);
+				packetProtocols.add(pair);
+				UdpAnalyzer udpAnalyzer = new UdpAnalyzer();
+				udpAnalyzer.setPacket(packet);
+			}
+			else if (packet.hasHeader(Ethernet.ID)) {
+				Pair pair = new Pair(packet, Protocol.IP6);
 				packetProtocols.add(pair);
 				UdpAnalyzer udpAnalyzer = new UdpAnalyzer();
 				udpAnalyzer.setPacket(packet);
