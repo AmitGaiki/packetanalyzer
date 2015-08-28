@@ -5,6 +5,7 @@
  */
 package pcap;
 
+import pcap.reader.PcapReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.jnetpcap.packet.JHeader;

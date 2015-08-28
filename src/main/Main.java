@@ -12,7 +12,7 @@ import org.jnetpcap.protocol.tcpip.Http;
 import org.jnetpcap.protocol.tcpip.Tcp;
 import pcap.Packet;
 import pcap.PayloadRetriever;
-import pcap.PcapReader;
+import pcap.reader.PcapReader;
 
 /**
  *
